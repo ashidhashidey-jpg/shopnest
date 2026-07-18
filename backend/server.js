@@ -5,9 +5,7 @@ const connectDB = require('./config/db');
 const path = require('path');
 const cloudinary = require('./config/cloudinary');
 
-cloudinary.api.ping()
-  .then(result => console.log("CLOUDINARY OK:", result))
-  .catch(err => console.log("CLOUDINARY ERROR:", err));
+
 
 dotenv.config();
 connectDB();
