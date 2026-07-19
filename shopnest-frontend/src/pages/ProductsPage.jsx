@@ -157,27 +157,16 @@ const ProductsPage = () => {
 
           {!error && (
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-             {loading ? (
-  <p>Loading...</p>
+           {loading ? (
+  Array.from({ length: 6 }).map((_, index) => (
+    <ProductCardSkeleton key={index} />
+  ))
 ) : (
   filtered.map((product) => (
-    <div
+    <ProductCard
       key={product._id}
-      style={{
-        border: "1px solid black",
-        padding: "10px",
-        margin: "10px",
-      }}
-    >
-      <h3>{product.name}</h3>
-      <p>{product.category}</p>
-      <p>₹{product.price}</p>
-      <img
-        src={`https://shopnest-hyl8.onrender.com${product.imageUrl}`}
-        width="150"
-        alt={product.name}
-      />
-    </div>
+      product={product}
+    />
   ))
 )}
             </div>
