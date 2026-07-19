@@ -14,8 +14,20 @@ const app = express();
 
 // Set CORS for frontend URL / allow single-node deploy
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', process.env.FRONTEND_URL],
-  credentials: true
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      process.env.CLIENT_URL,
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
 
 app.use(express.json());
